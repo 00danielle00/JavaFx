@@ -1,6 +1,5 @@
 package org.example.demoog;
 
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,21 +16,21 @@ public class Pantalla2Controller {
     private TextField nombreTextField;
     @FXML
     private TextField precioTextField;
+    @FXML
+    private TableColumn<Bocadillo,String> nombreTableColumn;
+    @FXML
+    private TableColumn<Bocadillo,Double>  precioTableColumn;
+    @FXML
+    private TableView<Bocadillo> tablaBocadillos;
 
     private ObservableList<Bocadillo> listaBocadillos = FXCollections.observableArrayList();
 
     @FXML
-    private TableColumn<Bocadillo, String> nombreTableColumn;
-    @FXML
-    private TableColumn<Bocadillo, Double> precioTableColumn;
+    public void initialize(){
 
-    @FXML
-    private TableView<Bocadillo> tablaBocadillos;
-
-    @FXML
-    public void initialize() {
         nombreTableColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getNombre()));
-        precioTableColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleDoubleProperty(data.getValue().getPrecio().asObject()));
+        precioTableColumn.setCellValueFactory(data -> new javafx.beans.property.SimpleDoubleProperty(data.getValue().getPrecio()).asObject());
+
         tablaBocadillos.setItems(listaBocadillos);
 
     }
@@ -41,20 +40,24 @@ public class Pantalla2Controller {
     }
 
     public void guardarBocadillos() {
+
         String nombre = nombreTextField.getText();
         double precio;
-        try {
+
+        try{
             precio = Double.parseDouble(precioTextField.getText());
-        } catch (Exception e) {
-            System.out.println("Precio invalido");
+        }catch(Exception e){
+            System.out.println("Precio inválido.");
             return;
         }
-        Bocadillo bocadillo = new Bocadillo(nombre, precio);
+
+        Bocadillo bocadillo = new Bocadillo(nombre,precio);
         listaBocadillos.add(bocadillo);
 
-        System.out.println("Bocadillo creado " + bocadillo.getNombre() + " con precio " + bocadillo.getPrecio() + "€");
+        System.out.println("Bocadillo creado: " + bocadillo.getNombre() + " con precio " + bocadillo.getPrecio() + "€.");
+
         nombreTextField.clear();
         precioTextField.clear();
+
     }
 }
-
