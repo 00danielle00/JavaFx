@@ -13,5 +13,7 @@
 
   <Label fx:id="welcomeText"/>
   <Button text="Hello!" onAction="#onHelloButtonClick"/>
-  <Button text="Hello!" fx:id="contar"/>
+  <Button text="Contarr" fx:id="contar"/>
+  <Label fx:id="etiquetaContador"/>
+  <Button fx:id="pantalla2" text="Ir a pantalla 2" onAction="#irApantalla2"/>
 </VBox>

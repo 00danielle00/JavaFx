@@ -1,8 +1,11 @@
 package org.example.demoog;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+
+import java.io.IOException;
 
 public class HelloController {
     static int contador;
@@ -10,15 +13,27 @@ public class HelloController {
     private Label welcomeText;
 
     @FXML
+    private Label etiquetaContador;
+
+    @FXML
     public Button contar;
 
     @FXML
     public void initialize(){
-        contar.setOnAction(e -> System.out.println(++contador));
-    }
+        Contador contador1 = new Contador();
+        contar.setOnAction(e -> {
+            contador1.incrementar();
+            System.out.println(contador1.getContador());
+            etiquetaContador.setText(Integer.toString(contador1.getContador()));
+        });
+    };
 
     @FXML
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
+    }
+
+    public void irApantalla2() throws IOException {
+        HelloApplication.setRoot("pantalla2");
     }
 }
